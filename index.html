@@ -24,22 +24,12 @@
     <section>
         <h2>Our Services</h2>
         <div class="services">
-            <div class="service-box" onclick="showLogoGenerator()">Logo Design</div>
+            <div class="service-box" onclick="window.location.href='logo-generator.html'">Logo Design</div>
             <div class="service-box">Instagram Post Making</div>
             <div class="service-box">PPT Creation</div>
             <div class="service-box">YouTube Template Making</div>
             <div class="service-box">Google Business Setup</div>
         </div>
-    </section>
-    
-    <section id="logo-generator" style="display:none;">
-        <h2>AI Logo Generator</h2>
-        <form onsubmit="generateLogo(event)">
-            <input type="text" id="business-name" placeholder="Enter Business Name" required>
-            <input type="text" id="style" placeholder="Enter Style (Minimal, Modern, etc.)" required>
-            <button type="submit">Generate Logo</button>
-        </form>
-        <div id="logo-result"></div>
     </section>
     
     <section>
@@ -55,19 +45,42 @@
     <footer>
         <p>Contact us: <a href="mailto:your-email@example.com" style="color: lightblue;">Email Us</a> | <a href="https://wa.me/yourwhatsappnumber" style="color: lightblue;">WhatsApp</a></p>
     </footer>
+</body>
+</html>
+
+<!-- Logo Generator Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Logo Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; background-color: #f4f4f4; }
+        .container { padding: 20px; }
+        input { width: 80%; padding: 10px; margin: 10px; }
+        button { padding: 10px; background: #333; color: white; border: none; cursor: pointer; }
+        #logo { margin-top: 20px; padding: 20px; background: white; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>AI Logo Generator</h2>
+        <input type="text" id="businessName" placeholder="Enter Business Name">
+        <button onclick="generateLogo()">Generate Logo</button>
+        <div id="logo"></div>
+    </div>
     
     <script>
-        function showLogoGenerator() {
-            document.getElementById('logo-generator').style.display = 'block';
-        }
-        
-        function generateLogo(event) {
-            event.preventDefault();
-            let businessName = document.getElementById('business-name').value;
-            let style = document.getElementById('style').value;
-            let logoUrl = `https://logoipsum.com/api/logo?name=${businessName}&style=${style}`;
-            document.getElementById('logo-result').innerHTML = `<img src="${logoUrl}" alt="Generated Logo" style="margin-top:10px; max-width:100%;">`;
+        function generateLogo() {
+            const businessName = document.getElementById('businessName').value;
+            if (!businessName) {
+                alert("Please enter a business name");
+                return;
+            }
+            document.getElementById('logo').innerHTML = `<h2>${businessName}</h2><p>Simple AI-generated Logo</p>`;
         }
     </script>
 </body>
 </html>
+
