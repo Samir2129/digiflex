@@ -13,44 +13,28 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>AI Logo Generator</h2>
-        <input type="text" id="businessName" placeholder="Enter Business Name">
-        <button onclick="generateLogo()">Generate Logo</button>
-        <div id="logo"></div>
-    </div>
-    
-    <script>
-        function generateLogo() {
-            const businessName = document.getElementById('businessName').value;
-            if (!businessName) {
-                alert("Please enter a business name");
-                return;
-            }
+   # Example posting a text URL:
 
-            const apiKey = "9c2fe258-adde-46cf-afc3-729fd17e919b; // Replace with your DeepAI API key
-            
-            fetch("https://api.deepai.org/api/logo-generator", {
-                method: "POST",
-                headers: {
-                    "api-key": 9c2fe258-adde-46cf-afc3-729fd17e919b,
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: `text=${encodeURIComponent(businessName)}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.output_url) {
-                    document.getElementById('logo').innerHTML = `<img src="${data.output_url}" alt="Generated Logo" width="200">`;
-                } else {
-                    alert("Failed to generate logo. Please try again later.");
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Error generating logo.");
-            });
-        }
+curl \
+    -F 'text=YOUR_TEXT_URL' \
+    -H 'api-key:9c2fe258-adde-46cf-afc3-729fd17e919b' \
+    https://api.deepai.org/api/text2img 
+
+
+# Example posting a local text file:
+
+curl \
+    -F 'text=@/path/to/your/file.txt' \
+    -H 'api-key:9c2fe258-adde-46cf-afc3-729fd17e919b' \
+    https://api.deepai.org/api/text2img 
+
+
+# Example directly sending a text string:
+
+curl \
+    -F 'text=YOUR_TEXT_HERE' \
+    -H 'api-key:9c2fe258-adde-46cf-afc3-729fd17e919b' \
+    https://api.deepai.org/api/text2img 
     </script>
      
     <footer>
