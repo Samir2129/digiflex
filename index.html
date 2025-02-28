@@ -61,29 +61,9 @@
                 return;
             }
             
-            fetch("https://api.deepai.org/api/text2img", {
-                method: "POST",
-                headers: {
-                    "Api-Key": "9c2fe258-adde-46cf-afc3-729fd17e919b",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    text: `Creative modern logo for ${businessName}`,
-                    grid_size: "1"
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.output_url) {
-                    document.getElementById('logo').innerHTML = `<img src="${data.output_url}" alt="Generated Logo" width="200">`;
-                } else {
-                    alert("Failed to generate logo. Try again later.");
-                }
-            })
-            .catch(error => {
-                console.error("Error generating logo:", error);
-                alert("An error occurred. Please try again.");
-            });
+            // Free API for logo generation
+            const logoUrl = `https://fakeimg.pl/200x100/?text=${encodeURIComponent(businessName)}&font=lobster`;
+            document.getElementById('logo').innerHTML = `<img src="${logoUrl}" alt="Generated Logo">`;
         }
     </script>
     <footer>
