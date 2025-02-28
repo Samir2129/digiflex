@@ -78,9 +78,20 @@
                 alert("Please enter a business name");
                 return;
             }
-            document.getElementById('logo').innerHTML = `<h2>${businessName}</h2><p>Simple AI-generated Logo</p>`;
+            
+            // Open-source AI logo generator (basic SVG-based example)
+            const colors = ['#ff5733', '#33ff57', '#3357ff', '#f39c12', '#8e44ad'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const logoSVG = `
+                <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="75" cy="75" r="50" fill="${randomColor}" />
+                    <text x="50%" y="50%" font-size="20" text-anchor="middle" fill="white" dy=".3em">${businessName.charAt(0).toUpperCase()}</text>
+                </svg>`;
+            
+            document.getElementById('logo').innerHTML = logoSVG;
         }
     </script>
 </body>
 </html>
+
 
