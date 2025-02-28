@@ -37,22 +37,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Logo Generator</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; background-color: #f4f4f4; }
-        .container { padding: 20px; }
-        input { width: 80%; padding: 10px; margin: 10px; }
-        button { padding: 10px; background: #333; color: white; border: none; cursor: pointer; }
-        #logo { margin-top: 20px; padding: 20px; background: white; display: inline-block; }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/launchaco/logo_builder@master/src/assets/style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>AI Logo Generator</h2>
+    <header>
+        <h1>AI Logo Generator</h1>
+    </header>
+    
+    <section>
         <input type="text" id="businessName" placeholder="Enter Business Name">
         <button onclick="generateLogo()">Generate Logo</button>
-        <div id="logo"></div>
-    </div>
-    
+        <div id="logoContainer"></div>
+    </section>
+
     <script>
         function generateLogo() {
             const businessName = document.getElementById('businessName').value;
@@ -60,11 +57,34 @@
                 alert("Please enter a business name");
                 return;
             }
-            
-            // Free API for logo generation
-            const logoUrl = `https://fakeimg.pl/200x100/?text=${encodeURIComponent(businessName)}&font=lobster`;
-            document.getElementById('logo').innerHTML = `<img src="${logoUrl}" alt="Generated Logo">`;
+
+            fetch("https://api.deepai.org/api/logo-generator", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "api-key": "9c2fe258-adde-46cf-afc3-729fd17e919b"
+                },
+                body: new URLSearchParams({
+                    text: businessName
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.output_url) {
+                    document.getElementById('logoContainer').innerHTML = `<img src="${data.output_url}" alt="Generated Logo" width="200">`;
+                } else {
+                    alert("Failed to generate logo. Try again later.");
+                }
+            })
+            .catch(error => {
+                console.error("Error generating logo:", error);
+                alert("Failed to generate logo. Try again later.");
+            });
         }
+    </script>
+</body>
+</html>
+
     </script>
     <footer>
         <p>Contact us: <a href="mailto:mendhesamir970@gmail.com" style="color: lightblue;">Email Us</a> | <a href="https://wa.me/9096096966" style="color: lightblue;">WhatsApp</a></p>
